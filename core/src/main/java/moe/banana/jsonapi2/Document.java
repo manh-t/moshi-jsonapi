@@ -240,15 +240,18 @@ public abstract class Document implements Serializable {
         return result;
     }
 
-    static void bindDocument(Document document, Object resource) {
+    static void bindDocument(Document document, Object resource, int instanceId) {
         if (resource instanceof ResourceIdentifier) {
             ((ResourceIdentifier) resource).setDocument(document);
+            ((ResourceIdentifier) resource).setInstanceId(instanceId);
         }
     }
 
     static void bindDocument(Document document, Collection<?> resources) {
+        int count = 0;
         for (Object i : resources) {
-            bindDocument(document, i);
+            bindDocument(document, i, count);
+            count++;
         }
     }
 }
