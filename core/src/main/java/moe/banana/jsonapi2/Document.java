@@ -11,6 +11,7 @@ public abstract class Document implements Serializable {
     private JsonBuffer meta;
     private JsonBuffer links;
     private JsonBuffer jsonApi;
+    private int instanceId = 0;
 
     public Document() {
     }
@@ -71,7 +72,8 @@ public abstract class Document implements Serializable {
 
             @Override
             public boolean add(Resource resource) {
-                bindDocument(Document.this, resource, -1);
+                bindDocument(Document.this, resource, instanceId);
+                instanceId++;
                 included.put(new ResourceIdentifier(resource), resource);
                 return true;
             }
