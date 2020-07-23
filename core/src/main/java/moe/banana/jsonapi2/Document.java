@@ -71,7 +71,7 @@ public abstract class Document implements Serializable {
 
             @Override
             public boolean add(Resource resource) {
-                bindDocument(Document.this, resource);
+                bindDocument(Document.this, resource, -1);
                 included.put(new ResourceIdentifier(resource), resource);
                 return true;
             }
@@ -80,7 +80,7 @@ public abstract class Document implements Serializable {
             public boolean remove(Object o) {
                 if (o instanceof ResourceIdentifier) {
                     Resource resource = included.remove(new ResourceIdentifier(((ResourceIdentifier) o)));
-                    bindDocument(null, resource);
+                    bindDocument(null, resource, -1);
                     return resource != null;
                 }
                 return false;
